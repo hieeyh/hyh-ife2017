@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义checkbox、radio样式</title>
+</head>
+<style>
+  #select1,#select2 {
+    display: none;
+  }
+  #label1:after {
+    display: inline-block;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: url(bg.png) -24px -10px;
+  }
+  #label2:after {
+    display: inline-block;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: url(bg.png) -24px -32px;
+  }
+  #select1:checked + label:after{
+    background-position: -59px -10px;
+  }
+  #select2:checked + label:after{
+    background-position: -59px -32px;
+  }
+</style>
+<body>
+  <form>
+    <input type="radio" id="select1" />
+    <label for="select1" id="label1"></label>
+    <br />
+    <input type="checkbox" id="select2" />
+    <label for="select2" id="label2"></label>
+  </form>
+</body>
+</html>
