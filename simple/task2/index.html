@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义网页右键菜单</title>
+    <style>
+        p {
+            padding: 20px;
+            border: 1px solid #aaa;
+            background-color: #eee;
+            border-radius: 8px;
+        }
+        #menu {
+            margin:0; 
+            padding:0;
+            border: 1px solid #333;
+            background-color: #fff;
+            list-style: none;
+            border-radius: 5px;
+        }
+        #menu li {
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        #menu li:first-child {
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <p id="main">right click to see the menu</p>
+    <ul id="menu">
+        <li onclick="alert('Menu Item 1')">Menu Item 1</li>
+        <li onclick="alert('Menu Item 2')">Menu Item 2</li>
+    </ul>
+    <script type="text/javascript">
+        window.onload = function(e) {
+            var menu = document.getElementById('menu');
+            var main = document.getElementById('main');
+            var menuWidth = 102;
+            var menuHeight = 133;
+            var isMouseIn = false;
+            // 获取窗口宽高
+            if (window.innerWidth)
+                var winWidth = window.innerWidth;
+            else if ((document.body) && (document.body.clientWidth))
+                var winWidth = document.body.clientWidth;
+            // 获取窗口高度
+            if (window.innerHeight)
+                var winHeight = window.innerHeight;
+            else if ((document.body) && (document.body.clientHeight))
+                var winHeight = document.body.clientHeight;
+            // 先让列表隐藏
+            menu.style.display = 'none';
+            // 获取鼠标位置函数
+            function getMousePos(e) {
+                var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+                var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+                if (e.pageX || e.pageY) {
+                    return {'x': e.pageX, 'y': e.pageY};
+                } else {
+                    return {'x': e.clientX + scrollX, 'y': e.clientY + scrollY};
+                }
+            }
+            // 判断鼠标是否在指定区域内
+            main.onmouseover = function(e) {
+                e.stopPropagation();
+                isMouseIn = true;
+            }
+            main.onmouseout = function(e) {
+                e.stopPropagation();
+                isMouseIn = false;
+            }
+            // 处理事件
+            document.oncontextmenu = function(e) {
+                // 阻止默认事件
+                e.preventDefault();
+                // 获取鼠标位置
+                var mousePos = getMousePos(e);
+                // 如果鼠标在指定区域内
+                if(isMouseIn) {
+                    menu.style.display = 'block';
+                    menu.style.position = 'absolute';
+                    console.log(mousePos.y,menuHeight,winHeight);
+                    // 右边区域不够大时展示在左下方
+                    if (winWidth < mousePos.x + menuWidth) {
+                        menu.style.left = (mousePos.x - menuWidth) + 'px';
+                        menu.style.top = mousePos.y + 'px';
+                    } else if (winHeight < mousePos.y + menuHeight) {  // 下面区域不够大时展示在右上方
+                        menu.style.left = mousePos.x + 'px';
+                        menu.style.top = (mousePos.y - menuHeight)+ 'px';
+                    } else {
+                        menu.style.left = mousePos.x + 'px';
+                        menu.style.top = mousePos.y + 'px';
+                    }
+                }
+            }
+            // 点击其他区域，列表消失
+            document.onclick = function(e) {
+                menu.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
