@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    请输入一个电话号码：<input type="text" name="inputTel" id="inputTel" />
+    <button type="button" onclick="testTel()">测试</button>
+    <br />
+    请输入一段字符串： <input type="text" name="inputStr" id="inputStr">
+    <button type="button" onclick="testStr()">测试</button>
+    <script type="text/javascript">
+        function testTel() {
+            var inputTel = document.getElementById('inputTel').value;
+            // 国内的手机号都是以13、15、18开头的
+            var reg = /^1[3|5|8]\d{9}$/;
+            if (reg.test(inputTel)) {
+                alert('输入正确');
+            } else {
+                alert('不是正确的手机号');
+            }
+        }
+        function testStr() {
+            var inputStr = document.getElementById('inputStr').value;
+            console.log(inputStr);
+            // 构建正则表达式
+            // 首先匹配多个或一个字母构成的单词，然后匹配一个或多个空白符，最后‘\1’匹配第一个括号中的内容，看是否有重复的
+            var reg = /\b([a-zA-Z]+)\s+\1\b/g;
+            if (reg.test(inputStr)) {
+                alert('有相邻重复单词');
+            } else {
+                alert('没有相邻重复单词');
+            }
+        }
+    </script>
+</body>
+</html>
