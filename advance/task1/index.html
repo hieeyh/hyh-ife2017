@@ -16,24 +16,74 @@
         background: url(img/timg.jpeg) 600px 375px;
         text-align: center;
     }
-    .content {
-        position: relative;
+    .main:hover {
+        filter: blur(2px);
+    }
+    .top-bottom {
+        position: absolute;
         top:50%;
         left: 50%;
         transform:translateY(-50%) translateX(-50%);
+        text-align: center;
     }
-    .content a {
+    .left-right a {
         text-decoration: none;
-        font-size: 18px;
+        font-size: 22px;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+    .main:hover .left-right a {
+        opacity: 1;
+    }
+    .top-bottom::before,
+    .top-bottom::after,
+    .left-right::before,
+    .left-right::after{
+        position: absolute;
+        background: #fff;
+        content: " ";
+        transition:transform 0.3s;
+        -webkit-transition:-webkit-transform 0.3s;
+        transform:scale3d(0,0,1);
+        -webkit-transform: scale3d(0,0,1);
+    }
+    .top-bottom::before,
+    .top-bottom::after{
+        width: 100%;
+        height: 2px;
+        left:0;
+    }
+    .top-bottom::before{
+        top:0;
+    }
+    .top-bottom::after{
+        bottom: 0;
+    }
+    .left-right::before,
+    .left-right::after{
+        width: 2px;
+        height: 100%;
+        top:0;
+    }
+    .left-right::before{
+        left: 0;
+    }
+    .left-right::after{
+        right: 0;
+    }
+    .main:hover .top-bottom::after,
+    .main:hover .top-bottom::before,
+    .main:hover .left-right::after,
+    .main:hover .left-right::before{
+        transform:scale3d(1,1,1);
+        -webkit-transform:scale3d(1,1,1);
     }
     @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
-        .content {
+        .left-right a{
             background-image: -webkit-linear-gradient(left, #6186a3, #89658b 25%, #cd8183 50%, #f3a87e 75%, #d3ca93);
-            color: transparent;
             -webkit-text-fill-color: transparent;
             -webkit-background-clip: text;
             -webkit-background-size: 200% 100%;
-            background-size: 200% 100%;
             -webkit-animation: content-gradient 4s infinite linear;
         }
     }
@@ -57,9 +107,10 @@
 </style>
 <body>
     <div class="main">
-        <div class="content">
-            <h1>欢迎来到hieeyh的博客</h1>
-            <!-- <a href="http://www.hyuhan.com" target="_blank">点击进入</a> -->
+    </div>
+    <div class="top-bottom">
+        <div class="left-right">
+            <a href="http://www.hyuhan.com" target="_blank">欢迎来到hieeyh的博客</a>
         </div>
     </div>
 </body>
