@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>有趣的鼠标悬浮效果</title>
+</head>
+<style type="text/css">
+    .main {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -300px;
+        margin-top: -187px;
+        width: 600px;
+        height: 375px;
+        background: url(img/timg.jpeg) 600px 375px;
+        text-align: center;
+    }
+    .content {
+        position: relative;
+        top:50%;
+        left: 50%;
+        transform:translateY(-50%) translateX(-50%);
+    }
+    .content a {
+        text-decoration: none;
+        font-size: 18px;
+    }
+    @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+        .content {
+            background-image: -webkit-linear-gradient(left, #6186a3, #89658b 25%, #cd8183 50%, #f3a87e 75%, #d3ca93);
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-background-size: 200% 100%;
+            background-size: 200% 100%;
+            -webkit-animation: content-gradient 4s infinite linear;
+        }
+    }
+    @-webkit-keyframes content-gradient {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: -100% 0;
+        }
+    }
+    @keyframes content-gradient {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: -100% 0;
+        }
+    }
+
+</style>
+<body>
+    <div class="main">
+        <div class="content">
+            <h1>欢迎来到hieeyh的博客</h1>
+            <!-- <a href="http://www.hyuhan.com" target="_blank">点击进入</a> -->
+        </div>
+    </div>
+</body>
+</html>
